@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Register - Django Blog{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Join Django Blog</h2>
+    <form method="POST">
+        {% csrf_token %}
+        
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <strong>Please correct the following errors:</strong>
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+            </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already have an account? <a href="{% url 'login' %}">Sign In</a>
+        </small>
+    </div>
+</div>
+{% endblock %}

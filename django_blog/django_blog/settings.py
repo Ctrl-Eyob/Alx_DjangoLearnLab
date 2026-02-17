@@ -4,7 +4,7 @@ Django settings for django_blog project.
 
 from pathlib import Path
 import os
-
+from django.contrib.messages import constants as messages
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -85,6 +85,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'post-list'
+LOGOUT_REDIRECT_URL = 'post-list'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+    messages.SUCCESS: 'success',
+    messages.INFO: 'info',
+    messages.WARNING: 'warning',
+}
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
